@@ -7,6 +7,8 @@ import java.util.stream.Stream;
 import com.exemplo.gerenciaclientes.models.ClienteModel;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class ClienteController {
@@ -20,4 +22,13 @@ public class ClienteController {
         ).collect(Collectors.toList());
     }
 
+    public void getClientes(Model memoria){
+        memoria.addAttribute("clientes", this.clientes);
+    }
+
+    @GetMapping ("/clientes")
+    public String clientes(Model memoria){
+        this.getClientes(memoria);
+        return "clientes";
+    }
 }
