@@ -9,6 +9,7 @@ import com.exemplo.gerenciaclientes.models.ClienteModel;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class ClienteController {
@@ -30,5 +31,12 @@ public class ClienteController {
     public String clientes(Model memoria){
         this.getClientes(memoria);
         return "clientes";
+    }
+
+    @PostMapping ("/clientes/salvar")
+    public String salvar(ClienteModel cliente){
+        cliente.setId(new Long(this.clientes.size()+1));
+        clientes.add(cliente);
+        return "redirect:/clientes";
     }
 }

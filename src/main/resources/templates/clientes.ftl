@@ -12,7 +12,7 @@
             <h1>Gerenciamento de clientes</h1>
             <p>Welcome</p>
         </div>
-        <form action="#" method="POST">
+        <form action="/clientes/salvar" method="POST">
             <div class="form-group">
                 <label for="nome">Nome</label>
                 <input type="text" class="form-control" id="nome" name="nome">
