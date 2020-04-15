@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class ClienteController {
@@ -37,6 +38,12 @@ public class ClienteController {
     public String salvar(ClienteModel cliente){
         cliente.setId(new Long(this.clientes.size()+1));
         clientes.add(cliente);
+        return "redirect:/clientes";
+    }
+
+    @GetMapping ("/clientes/excluir")
+    public String excluir(@RequestParam Long id){
+        this.clientes.removeIf(cliente -> cliente.getId().equals(id));
         return "redirect:/clientes";
     }
 }

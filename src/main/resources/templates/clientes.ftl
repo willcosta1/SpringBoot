@@ -40,7 +40,7 @@
                     <td>${cliente.cpf}</td>
                     <td>
                         <a href="" class="btn btn-warning">Alterar</a>
-                        <a href="" class="btn btn-danger">Excluir</a>
+                        <a href="/clientes/excluir?id=${cliente.id}" class="btn btn-danger">Excluir</a>
                     </td>
                 </tr>
                 </#list>
