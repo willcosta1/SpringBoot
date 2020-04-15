@@ -12,16 +12,25 @@
             <h1>Gerenciamento de clientes</h1>
             <p>Welcome</p>
         </div>
+        <#if alterar??>
+        <form action="/clientes/alterar" method="POST">
+        <input type="hidden" value="${(clienteAtual.id)!}" name="id">
+        <#else>
         <form action="/clientes/salvar" method="POST">
+        </#if>
             <div class="form-group">
                 <label for="nome">Nome</label>
-                <input type="text" class="form-control" id="nome" name="nome">
+                <input value="${(clienteAtual.nome)!}" type="text" class="form-control" id="nome" name="nome">
             </div>
             <div class="form-group">
                 <label for="cpf">CPF</label>
-                <input type="text" class="form-control" id="cpf" name="cpf">
+                <input value="${(clienteAtual.cpf)!}" type="text" class="form-control" id="cpf" name="cpf">
             </div>
-            <button type="submit" class="btn btn-primary">Salvar</button>
+            <#if alterar??>
+            <input type="submit" class="btn btn-warning" value="Alterar">
+            <#else>
+            <input type="submit" class="btn btn-primary" value="Salvar">
+            </#if>
         </form>
     </div>
     <div class="mt-5">
@@ -39,7 +48,7 @@
                     <td>${cliente.nome}</td>
                     <td>${cliente.cpf}</td>
                     <td>
-                        <a href="" class="btn btn-warning">Alterar</a>
+                        <a href="/clientes/prepararAlterar?id=${cliente.id}" class="btn btn-warning">Alterar</a>
                         <a href="/clientes/excluir?id=${cliente.id}" class="btn btn-danger">Excluir</a>
                     </td>
                 </tr>

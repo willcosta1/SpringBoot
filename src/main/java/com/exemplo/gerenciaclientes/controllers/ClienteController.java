@@ -46,4 +46,21 @@ public class ClienteController {
         this.clientes.removeIf(cliente -> cliente.getId().equals(id));
         return "redirect:/clientes";
     }
+
+    @GetMapping ("/clientes/prepararAlterar")
+    public String prepararAlterar(@RequestParam Long id, Model memoria){
+        var cliente = clientes.stream().filter(clienteAtual -> clienteAtual.getId().equals(id)).findAny().get();
+        memoria.addAttribute("clienteAtual", cliente);
+        this.getClientes(memoria);
+        memoria.addAttribute("alterar", true);
+        return "clientes";
+    }
+    
+    @PostMapping ("/clientes/alterar")
+    public String alterar(ClienteModel clienteNovo){
+        var cliente = clientes.stream().filter(clienteAtual -> clienteAtual.getId().equals(clienteNovo.getId())).findAny().get();
+        cliente.setNome(clienteNovo.getNome());
+        cliente.setCpf(clienteNovo.getCpf());
+        return "redirect:/clientes";
+    }
 }
