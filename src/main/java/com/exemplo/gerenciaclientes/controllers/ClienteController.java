@@ -4,10 +4,13 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import javax.validation.Valid;
+
 import com.exemplo.gerenciaclientes.models.ClienteModel;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -35,7 +38,13 @@ public class ClienteController {
     }
 
     @PostMapping ("/clientes/salvar")
-    public String salvar(ClienteModel cliente){
+    public String salvar(@Valid ClienteModel cliente, BindingResult resul, Model memoria){
+        if(resul.hasErrors()){
+            resul.getFieldErrors().forEach(erro -> memoria.addAttribute(erro.getField(), erro.getDefaultMessage()));
+            memoria.addAttribute("clienteAtual", cliente);
+            this.getClientes(memoria);
+            return "clientes";
+        }
         cliente.setId(new Long(this.clientes.size()+1));
         clientes.add(cliente);
         return "redirect:/clientes";

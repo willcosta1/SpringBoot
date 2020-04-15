@@ -21,10 +21,22 @@
             <div class="form-group">
                 <label for="nome">Nome</label>
                 <input value="${(clienteAtual.nome)!}" type="text" class="form-control" id="nome" name="nome">
+                <#if nome??>
+                    <div class="mt-1 alert alert-danger alert-dismissible">
+                        <button type="button" class="close" data-dismiss="alert">&times;</button>
+                        <strong>Erro!</strong> ${nome}
+                    </div>
+                </#if>
             </div>
             <div class="form-group">
                 <label for="cpf">CPF</label>
                 <input value="${(clienteAtual.cpf)!}" type="text" class="form-control" id="cpf" name="cpf">
+                <#if cpf??>
+                    <div class="mt-1 alert alert-danger alert-dismissible">
+                        <button type="button" class="close" data-dismiss="alert">&times;</button>
+                        <strong>Erro!</strong> ${cpf}
+                    </div>
+                </#if>
             </div>
             <#if alterar??>
             <input type="submit" class="btn btn-warning" value="Alterar">
